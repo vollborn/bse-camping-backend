@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use App\Classes\DB;
+use Rakit\Validation\MissingRequiredParameterException;
 use Rakit\Validation\Rule;
 
 class ExistsRule extends Rule
@@ -11,6 +12,9 @@ class ExistsRule extends Rule
 
     protected $fillableParams = ['table', 'column'];
 
+    /**
+     * @throws MissingRequiredParameterException
+     */
     public function check($value): bool
     {
         if ((int) $value != $value) {

@@ -1,19 +1,22 @@
 <?php
 
 namespace App\Controllers;
+
 use App\Classes\DB;
 use App\Classes\Response;
 use App\Services\RequestValidationService;
-use Rakit\Validation\Rules\Date;
 
-class CustomerController {
-    public function index() {
+class CustomerController
+{
+    public function index(): Response
+    {
         $customers = DB::fetchAll('SELECT * FROM customers');
 
         return Response::create($customers);
     }
 
-    public function show() {
+    public function show(): Response
+    {
         $validator = RequestValidationService::create([
             'id' => 'required|integer|exists:customers'
         ]);
@@ -29,50 +32,52 @@ class CustomerController {
         return Response::create($customer);
     }
 
-    public function store() {
+    public function store(): Response
+    {
         $validator = RequestValidationService::create([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'city' => 'required',
-            'postcode' => 'required',
-            'street' => 'required',
-            'country_id' => 'required|integer|exists:countries',
-            'phone' => 'required',
-            'email' => 'required',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'city'          => 'required',
+            'postcode'      => 'required',
+            'street'        => 'required',
+            'country_id'    => 'required|integer|exists:countries',
+            'phone'         => 'required',
+            'email'         => 'required',
             'date_of_birth' => 'required|date'
         ]);
 
         if (!$validator->validate()) {
             return $validator->getResponse();
         }
-        
+
         $body = $validator->getBody();
         $query = 'INSERT INTO customers (first_name, last_name, city, postcode, street, country_id, phone, email, date_of_birth)'
             . ' VALUES (:first_name, :last_name, :city, :postcode, :street, :country_id, :phone, :email, :date_of_birth)';
-        
+
         $success = DB::query($query, $body);
 
         return Response::create([], $success ? 200 : 500);
     }
 
-    public function update() {
+    public function update(): Response
+    {
         $validator = RequestValidationService::create([
-            'id' => 'required|integer|exists:customers',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'city' => 'required',
-            'postcode' => 'required',
-            'street' => 'required',
-            'country_id' => 'required|integer|exists:countries',
-            'phone' => 'required',
-            'email' => 'required',
+            'id'            => 'required|integer|exists:customers',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'city'          => 'required',
+            'postcode'      => 'required',
+            'street'        => 'required',
+            'country_id'    => 'required|integer|exists:countries',
+            'phone'         => 'required',
+            'email'         => 'required',
             'date_of_birth' => 'required|date'
         ]);
 
         if (!$validator->validate()) {
             return $validator->getResponse();
         }
-        
+
         $body = $validator->getBody();
         $query = 'UPDATE customers SET'
             . ' first_name = :first_name,'
@@ -91,7 +96,8 @@ class CustomerController {
         return Response::create([], $success ? 200 : 500);
     }
 
-    public function delete() {
+    public function delete(): Response
+    {
         $validator = RequestValidationService::create([
             'id' => 'required|integer|exists:customers'
         ]);

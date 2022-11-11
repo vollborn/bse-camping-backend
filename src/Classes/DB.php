@@ -4,10 +4,12 @@ namespace App\Classes;
 
 use PDO;
 
-class DB {
+class DB
+{
     private static PDO $connection;
 
-    public static function connect() {
+    public static function connect(): void
+    {
         $dsn = sprintf(
             'mysql:dbname=%s;host=%s',
             $_ENV['DB_DATABASE'],
@@ -21,13 +23,14 @@ class DB {
         );
     }
 
-    public static function query(string $query, ?array $params = null) {
+    public static function query(string $query, ?array $params = null): bool
+    {
         $statement = self::$connection->prepare($query);
-        
+
         foreach ($params ?? [] as $key => $value) {
             $type = PDO::PARAM_STR;
 
-            if (gettype($value) === "int") {
+            if (gettype($value) === "integer") {
                 $type = PDO::PARAM_INT;
             }
 
@@ -38,19 +41,18 @@ class DB {
             return false;
         }
 
-        $success = $statement->execute();
-
-        return $success;
+        return $statement->execute();
     }
 
-    public static function fetch(string $query) {
+    public static function fetch(string $query): mixed
+    {
         $result = self::$connection->query($query);
 
         if (!$result) {
             return null;
         }
 
-        $fetch =  $result->fetch(PDO::FETCH_ASSOC);
+        $fetch = $result->fetch(PDO::FETCH_ASSOC);
 
         if (!$fetch) {
             return null;
@@ -59,17 +61,19 @@ class DB {
         return $fetch;
     }
 
-    public static function fetchAll(string $query) {
+    public static function fetchAll(string $query): bool|array
+    {
         $result = self::$connection->query($query);
 
         if (!$result) {
-            return null;
+            return false;
         }
 
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function migrate(): void {
+    public static function migrate(): void
+    {
         $basePath = __DIR__ . '/../Migrations';
         $files = array_diff(scandir($basePath), array('..', '.'));;
 

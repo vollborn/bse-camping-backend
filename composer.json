@@ -2,7 +2,8 @@
     "require": {
         "pecee/simple-router": "4.3.7.2",
         "rakit/validation": "^1.4",
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {
