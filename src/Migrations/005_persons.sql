@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS persons;
-
 CREATE TABLE persons (
     id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(255),

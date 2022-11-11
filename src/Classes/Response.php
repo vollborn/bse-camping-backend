@@ -2,6 +2,8 @@
 
 namespace App\Classes;
 
+use function file_get_contents;
+
 class Response
 {
     private mixed $content;
@@ -15,6 +17,13 @@ class Response
 
     public static function create($content = [], int $status = 200): static
     {
+        return new self($content, $status);
+    }
+
+    public static function view(string $view, int $status = 200): static
+    {
+        $content = file_get_contents('views/' . $view);
+
         return new self($content, $status);
     }
 

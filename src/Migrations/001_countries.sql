@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS countries;
-
 CREATE TABLE countries (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255)

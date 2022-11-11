@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS pitches;
-
 CREATE TABLE pitches (
     id INT PRIMARY KEY AUTO_INCREMENT,
     number VARCHAR(255),

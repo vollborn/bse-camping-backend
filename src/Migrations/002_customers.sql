@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS customers;
-
 CREATE TABLE customers (
     id INT PRIMARY KEY AUTO_INCREMENT,
     first_name VARCHAR(255),
@@ -11,5 +9,8 @@ CREATE TABLE customers (
     phone VARCHAR(255),
     email VARCHAR(255),
     date_of_birth DATE,
-    FOREIGN KEY (country_id) REFERENCES countries(id)
+
+    FOREIGN KEY (country_id)
+        REFERENCES countries(id)
+        ON DELETE CASCADE
 );
