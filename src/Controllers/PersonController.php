@@ -6,19 +6,19 @@ use App\Classes\DB;
 use App\Classes\Response;
 use App\Services\RequestValidationService;
 
-class AdditionalCostController
+class PersonController
 {
     public function index(): Response
     {
-        $additionalCosts = DB::fetchAll('SELECT * FROM additional_costs');
+        $persons = DB::fetchAll('SELECT * FROM persons');
 
-        return Response::create($additionalCosts);
+        return Response::create($persons);
     }
 
     public function show(): Response
     {
         $validator = RequestValidationService::create([
-            'id' => 'required|integer|exists:additional_costs'
+            'id' => 'required|integer|exists:persons'
         ]);
 
         if (!$validator->validate()) {
@@ -27,16 +27,17 @@ class AdditionalCostController
 
         $body = $validator->getBody();
 
-        $additionalCost = DB::fetch('SELECT * FROM additional_costs WHERE id = ' . $body['id']);
+        $person = DB::fetch('SELECT * FROM persons WHERE id = ' . $body['id']);
 
-        return Response::create($additionalCost);
+        return Response::create($person);
     }
 
     public function store(): Response
     {
         $validator = RequestValidationService::create([
-            'display_name' => 'required',
-            'price'        => 'required|numeric'
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'date_of_birth' => 'required|date',
         ]);
 
         if (!$validator->validate()) {
@@ -45,8 +46,8 @@ class AdditionalCostController
 
         $body = $validator->getBody();
 
-        $query = 'INSERT INTO additional_costs (display_name, price)'
-            . ' VALUES (:display_name, :price)';
+        $query = 'INSERT INTO persons (first_name, last_name, date_of_birth)'
+            . ' VALUES (:first_name, :last_name, :date_of_birth)';
 
         DB::query($query, $body);
 
@@ -58,9 +59,10 @@ class AdditionalCostController
     public function update(): Response
     {
         $validator = RequestValidationService::create([
-            'id'           => 'required|integer|exists:additional_costs',
-            'display_name' => 'required',
-            'price'        => 'required|numeric'
+            'id'            => 'required|integer|exists:persons',
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'date_of_birth' => 'required|date'
         ]);
 
         if (!$validator->validate()) {
@@ -69,9 +71,10 @@ class AdditionalCostController
 
         $body = $validator->getBody();
 
-        $query = 'UPDATE additional_costs SET'
-            . ' display_name = :display_name,'
-            . ' price = :price'
+        $query = 'UPDATE persons SET'
+            . ' first_name = :first_name,'
+            . ' last_name = :last_name,'
+            . ' date_of_birth = :date_of_birth'
             . ' WHERE id = :id';
 
         DB::query($query, $body);
@@ -82,7 +85,7 @@ class AdditionalCostController
     public function delete(): Response
     {
         $validator = RequestValidationService::create([
-            'id' => 'required|integer|exists:additional_costs'
+            'id' => 'required|integer|exists:persons'
         ]);
 
         if (!$validator->validate()) {
@@ -91,7 +94,7 @@ class AdditionalCostController
 
         $body = $validator->getBody();
 
-        DB::query('DELETE FROM additional_costs WHERE id = ' . $body['id']);
+        DB::query('DELETE FROM persons WHERE id = ' . $body['id']);
 
         return Response::create([]);
     }

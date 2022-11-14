@@ -52,7 +52,9 @@ class PitchController
 
         DB::query($query, $body);
 
-        return Response::create([]);
+        return Response::create([
+            'id' => DB::lastInsertId()
+        ]);
     }
 
     public function update(): Response

@@ -4,6 +4,7 @@ use App\Controllers\PitchController;
 use App\Controllers\CustomerController;
 use App\Controllers\AdditionalCostController;
 use App\Controllers\BookingController;
+use App\Controllers\PersonController;
 use Pecee\SimpleRouter\SimpleRouter;
 
 $url = $_ENV['URL_PREFIX'];
@@ -31,3 +32,9 @@ SimpleRouter::get($url . '/bookings/show', [BookingController::class, 'show']);
 SimpleRouter::post($url . '/bookings', [BookingController::class, 'store']);
 SimpleRouter::put($url . '/bookings', [BookingController::class, 'update']);
 SimpleRouter::delete($url . '/bookings', [BookingController::class, 'delete']);
+
+SimpleRouter::get($url . '/persons', [PersonController::class, 'index']);
+SimpleRouter::get($url . '/persons/show', [PersonController::class, 'show']);
+SimpleRouter::post($url . '/persons', [PersonController::class, 'store']);
+SimpleRouter::put($url . '/persons', [PersonController::class, 'update']);
+SimpleRouter::delete($url . '/persons', [PersonController::class, 'delete']);
