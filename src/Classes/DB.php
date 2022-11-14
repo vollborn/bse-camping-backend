@@ -45,6 +45,8 @@ class DB
         }
 
         self::bindValues($statement, $params);
+        
+        $statement->execute();
         $fetch = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (!$fetch) {
@@ -64,6 +66,7 @@ class DB
 
         self::bindValues($statement, $params);
 
+        $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 

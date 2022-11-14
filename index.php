@@ -27,6 +27,6 @@ SimpleRouter::setDefaultNamespace('App\Controllers');
 
 try {
     SimpleRouter::start();
-} catch (Exception) {
-    die(Response::view('not-found.html', 404));
+} catch (Exception $exception) {
+    die($exception->getMessage());
 }
