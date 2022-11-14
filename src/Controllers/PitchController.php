@@ -50,9 +50,9 @@ class PitchController
         $query = 'INSERT INTO pitches (field_number, width, height, price_per_day)'
             . ' VALUES (:field_number, :width, :height, :price_per_day)';
 
-        $success = DB::query($query, $body);
+        DB::query($query, $body);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
     }
 
     public function update(): Response
@@ -78,9 +78,9 @@ class PitchController
             . ' price_per_day = :price_per_day'
             . ' WHERE id = :id';
 
-        $success = DB::query($query, $body);
+        DB::query($query, $body);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
     }
 
     public function delete(): Response
@@ -95,8 +95,8 @@ class PitchController
 
         $body = $validator->getBody();
 
-        $success = DB::query('DELETE FROM pitches WHERE id = ' . $body['id']);
+        DB::query('DELETE FROM pitches WHERE id = ' . $body['id']);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
     }
 }

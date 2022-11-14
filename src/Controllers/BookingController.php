@@ -39,7 +39,9 @@ class BookingController
             'pitch_id'    => 'required|numeric|exists:pitches',
             'start_at'    => 'required|date',
             'end_at'      => 'required|date',
-            'has_pets'    => 'required|boolean'
+            'has_pets'    => 'required|boolean',
+            'persons'     => 'required|array',
+            'persons.*'   => 'required|integer|exists:persons'
         ]);
 
         if (!$validator->validate()) {
@@ -51,20 +53,33 @@ class BookingController
         $query = 'INSERT INTO bookings (customer_id, pitch_id, start_at, end_at, has_pets)'
             . ' VALUES (:customer_id, :pitch_id, :start_at, :end_at, :has_pets)';
 
-        $success = DB::query($query, $body);
+        DB::query($query, [
+            'customer_id' => $body['customer_id'],
+            'pitch_id'    => $body['pitch_id'],
+            'start_at'    => $body['start_at'],
+            'end_at'      => $body['end_at'],
+            'has_pets'    => $body['has_pets'],
+        ]);
 
-        return Response::create([], $success ? 200 : 500);
+        $id = DB::lastInsertId();
+        $this->addBookingPersons($id, $body['persons']);
+
+        return Response::create([
+            'id' => $id
+        ]);
     }
 
     public function update(): Response
     {
         $validator = RequestValidationService::create([
             'id'          => 'required|integer|exists:bookings',
-            'customer_id' => 'required|numeric|exists:customers',
-            'pitch_id'    => 'required|numeric|exists:pitches',
+            'customer_id' => 'required|integer|exists:customers',
+            'pitch_id'    => 'required|integer|exists:pitches',
             'start_at'    => 'required|date',
             'end_at'      => 'required|date',
-            'has_pets'    => 'required|boolean'
+            'has_pets'    => 'required|boolean',
+            'persons'     => 'required|array',
+            'persons.*'   => 'required|integer|exists:persons'
         ]);
 
         if (!$validator->validate()) {
@@ -81,9 +96,22 @@ class BookingController
             . ' has_pets = :has_pets'
             . ' WHERE id = :id';
 
-        $success = DB::query($query, $body);
+        DB::query($query, [
+            'id'          => $body['id'],
+            'customer_id' => $body['customer_id'],
+            'pitch_id'    => $body['pitch_id'],
+            'start_at'    => $body['start_at'],
+            'end_at'      => $body['end_at'],
+            'has_pets'    => $body['has_pets'],
+        ]);
 
-        return Response::create([], $success ? 200 : 500);
+        DB::query('DELETE FROM booking_person WHERE booking_id = :id', [
+            'id' => $body['id']
+        ]);
+
+        $this->addBookingPersons($body['id'], $body['persons']);
+
+        return Response::create([]);
     }
 
     public function delete(): Response
@@ -98,8 +126,21 @@ class BookingController
 
         $body = $validator->getBody();
 
-        $success = DB::query('DELETE FROM bookings WHERE id = ' . $body['id']);
+        DB::query('DELETE FROM bookings WHERE id = ' . $body['id']);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
+    }
+
+    private function addBookingPersons(int $id, array $persons)
+    {
+        $query = 'INSERT INTO booking_person (booking_id, person_id)'
+            . ' VALUES (:booking_id, :person_id)';
+
+        foreach ($persons as $personId) {
+            DB::query($query, [
+                'booking_id' => $id,
+                'person_id'  => $personId
+            ]);
+        }
     }
 }

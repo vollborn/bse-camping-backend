@@ -48,9 +48,9 @@ class AdditionalCostController
         $query = 'INSERT INTO additional_costs (display_name, price)'
             . ' VALUES (:display_name, :price)';
 
-        $success = DB::query($query, $body);
+        DB::query($query, $body);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
     }
 
     public function update(): Response
@@ -72,9 +72,9 @@ class AdditionalCostController
             . ' price = :price'
             . ' WHERE id = :id';
 
-        $success = DB::query($query, $body);
+        DB::query($query, $body);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
     }
 
     public function delete(): Response
@@ -89,8 +89,8 @@ class AdditionalCostController
 
         $body = $validator->getBody();
 
-        $success = DB::query('DELETE FROM additional_costs WHERE id = ' . $body['id']);
+        DB::query('DELETE FROM additional_costs WHERE id = ' . $body['id']);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
     }
 }

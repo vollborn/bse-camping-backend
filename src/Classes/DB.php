@@ -2,6 +2,7 @@
 
 namespace App\Classes;
 
+use Exception;
 use PDO;
 use PDOStatement;
 
@@ -24,16 +25,20 @@ class DB
         );
     }
 
-    public static function query(string $query, ?array $params = null): bool
+    public static function query(string $query, ?array $params = null): PDOStatement
     {
         $statement = self::$connection->prepare($query);
         if (!$statement) {
-            return false;
+            throw new Exception("The query was not successful.");
         }
 
         self::bindValues($statement, $params);
 
-        return $statement->execute();
+        if(!$statement->execute()) {
+            throw new Exception("The query was not successful.");
+        }
+
+        return $statement;
     }
 
     public static function fetch(string $query, ?array $params = null): mixed
@@ -82,6 +87,11 @@ class DB
         }
 
         self::query($query);
+    }
+
+    public static function lastInsertId(): int
+    {
+        return self::$connection->lastInsertId();
     }
 
     private static function bindValues(PDOStatement $statement, ?array $params = null): void

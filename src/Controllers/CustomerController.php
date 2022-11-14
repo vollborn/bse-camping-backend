@@ -54,9 +54,9 @@ class CustomerController
         $query = 'INSERT INTO customers (first_name, last_name, city, postcode, street, country_id, phone, email, date_of_birth)'
             . ' VALUES (:first_name, :last_name, :city, :postcode, :street, :country_id, :phone, :email, :date_of_birth)';
 
-        $success = DB::query($query, $body);
+        DB::query($query, $body);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
     }
 
     public function update(): Response
@@ -91,9 +91,9 @@ class CustomerController
             . ' date_of_birth = :date_of_birth'
             . ' WHERE id = :id';
 
-        $success = DB::query($query, $body);
+        DB::query($query, $body);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
     }
 
     public function delete(): Response
@@ -108,8 +108,8 @@ class CustomerController
 
         $body = $validator->getBody();
 
-        $success = DB::query('DELETE FROM customers WHERE id = ' . $body['id']);
+        DB::query('DELETE FROM customers WHERE id = ' . $body['id']);
 
-        return Response::create([], $success ? 200 : 500);
+        return Response::create([]);
     }
 }
