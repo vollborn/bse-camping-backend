@@ -2,8 +2,10 @@
 
 namespace App\Classes;
 
-class Body {
-    public static function get(): array {
+class Body
+{
+    public static function get(): array
+    {
         $body = array_merge($_GET, $_POST, $_FILES);
 
         if (

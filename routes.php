@@ -3,8 +3,10 @@
 use App\Controllers\CustomerController;
 use Pecee\SimpleRouter\SimpleRouter;
 
-SimpleRouter::get('/customers', [CustomerController::class, 'index']);
-SimpleRouter::get('/customers/show', [CustomerController::class, 'show']);
-SimpleRouter::post('/customers', [CustomerController::class, 'store']);
-SimpleRouter::put('/customers', [CustomerController::class, 'update']);
-SimpleRouter::delete('/customers', [CustomerController::class, 'delete']);
+$url = $_ENV['URL_PREFIX'];
+
+SimpleRouter::get($url . '/customers', [CustomerController::class, 'index']);
+SimpleRouter::get($url . '/customers/show', [CustomerController::class, 'show']);
+SimpleRouter::post($url . '/customers', [CustomerController::class, 'store']);
+SimpleRouter::put($url . '/customers', [CustomerController::class, 'update']);
+SimpleRouter::delete($url . '/customers', [CustomerController::class, 'delete']);

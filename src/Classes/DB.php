@@ -3,6 +3,7 @@
 namespace App\Classes;
 
 use PDO;
+use PDOStatement;
 
 class DB
 {
@@ -26,33 +27,25 @@ class DB
     public static function query(string $query, ?array $params = null): bool
     {
         $statement = self::$connection->prepare($query);
-
-        foreach ($params ?? [] as $key => $value) {
-            $type = PDO::PARAM_STR;
-
-            if (gettype($value) === "integer") {
-                $type = PDO::PARAM_INT;
-            }
-
-            $statement->bindValue($key, $value, $type);
-        }
-
         if (!$statement) {
             return false;
         }
 
+        self::bindValues($statement, $params);
+
         return $statement->execute();
     }
 
-    public static function fetch(string $query): mixed
+    public static function fetch(string $query, ?array $params = null): mixed
     {
-        $result = self::$connection->query($query);
+        $statement = self::$connection->prepare($query);
 
-        if (!$result) {
+        if (!$statement) {
             return null;
         }
 
-        $fetch = $result->fetch(PDO::FETCH_ASSOC);
+        self::bindValues($statement, $params);
+        $fetch = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (!$fetch) {
             return null;
@@ -61,15 +54,17 @@ class DB
         return $fetch;
     }
 
-    public static function fetchAll(string $query): bool|array
+    public static function fetchAll(string $query, ?array $params = null): bool|array
     {
-        $result = self::$connection->query($query);
+        $statement = self::$connection->prepare($query);
 
-        if (!$result) {
+        if (!$statement) {
             return false;
         }
 
-        return $result->fetchAll(PDO::FETCH_ASSOC);
+        self::bindValues($statement, $params);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function migrate(): void
@@ -84,5 +79,18 @@ class DB
         }
 
         self::query($query);
+    }
+
+    private static function bindValues(PDOStatement $statement, ?array $params = null): void
+    {
+        foreach ($params ?? [] as $key => $value) {
+            $type = PDO::PARAM_STR;
+
+            if (gettype($value) === "integer") {
+                $type = PDO::PARAM_INT;
+            }
+
+            $statement->bindValue($key, $value, $type);
+        }
     }
 }
