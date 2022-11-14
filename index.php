@@ -3,9 +3,12 @@
 require_once "vendor/autoload.php";
 
 use App\Classes\DB;
-use App\Classes\Response;
 use Pecee\SimpleRouter\SimpleRouter;
 use Dotenv\Dotenv;
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+header('Access-Control-Allow-Headers: *');
 
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();

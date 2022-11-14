@@ -32,6 +32,7 @@ class Response
         http_response_code($this->status);
 
         if (gettype($this->content) === "array") {
+            header('Content-Type: application/json; charset=utf-8');
             return json_encode($this->content);
         }
 
