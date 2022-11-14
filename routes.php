@@ -2,6 +2,7 @@
 
 use App\Controllers\PitchController;
 use App\Controllers\CustomerController;
+use App\Controllers\AdditionalCostController;
 use Pecee\SimpleRouter\SimpleRouter;
 
 $url = $_ENV['URL_PREFIX'];
@@ -17,3 +18,9 @@ SimpleRouter::get($url . '/pitches/show', [PitchController::class, 'show']);
 SimpleRouter::post($url . '/pitches', [PitchController::class, 'store']);
 SimpleRouter::put($url . '/pitches', [PitchController::class, 'update']);
 SimpleRouter::delete($url . '/pitches', [PitchController::class, 'delete']);
+
+SimpleRouter::get($url . '/additional-costs', [AdditionalCostController::class, 'index']);
+SimpleRouter::get($url . '/additional-costs/show', [AdditionalCostController::class, 'show']);
+SimpleRouter::post($url . '/additional-costs', [AdditionalCostController::class, 'store']);
+SimpleRouter::put($url . '/additional-costs', [AdditionalCostController::class, 'update']);
+SimpleRouter::delete($url . '/additional-costs', [AdditionalCostController::class, 'delete']);
