@@ -31,5 +31,6 @@ SimpleRouter::setDefaultNamespace('App\Controllers');
 try {
     SimpleRouter::start();
 } catch (Exception $exception) {
+    http_response_code(500);
     die($exception->getMessage());
 }
