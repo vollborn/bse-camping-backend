@@ -43,7 +43,12 @@ class RequestValidationService
 
     public function getBody(): array
     {
-        return Body::get();
+        $body = Body::get();
+        $keys = array_keys($this->rules);
+
+        return array_filter($body, function ($key) use ($keys) {
+            return in_array($key, $keys, true);
+        }, ARRAY_FILTER_USE_KEY);
     }
 
     public function getErrors(): array
