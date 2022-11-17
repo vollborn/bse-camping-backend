@@ -6,16 +6,16 @@ INSERT INTO customers (first_name, last_name, city, postcode, street, country_id
 ("Hans", "Wau", "Hamburg", "22566", "Walter-Baum-Strasse 1", 1, "04107203481", "hans@mail.de", "1999-12-06"),
 ("Walter", "Wau", "Dings", "23654", "Baum-Baum-Strasse 6", 1, "666666", "lena@mail.de", "2015-02-03");
 
-INSERT INTO pitches (field_number, width, height) values 
-("0.1", 10.10, 5.0),
-("0.2", 5.10, 5.0),
-("0.3", 6.10, 5.0),
-("1.1", 7.10, 5.0),
-("1.2", 10.10, 5.0),
-("1.3", 10.10, 5.0),
-("2.1", 5.10, 5.0),
-("2.2", 10.10, 5.0),
-("2.3", 8.10, 5.0);
+INSERT INTO pitches (field_number, width, height, price_per_day) values
+("0.1", 10.10, 5.0, 1.0),
+("0.2", 5.10, 5.0, 2.0),
+("0.3", 6.10, 5.0, 3.0),
+("1.1", 7.10, 5.0, 4.0),
+("1.2", 10.10, 5.0, 5.0),
+("1.3", 10.10, 5.0, 6.0),
+("2.1", 5.10, 5.0, 7.0),
+("2.2", 10.10, 5.0, 8.0),
+("2.3", 8.10, 5.0, 9.0);
 
 INSERT INTO bookings (customer_id, pitch_id, start_at,  end_at, has_pets) value 
 (1, 1, "2022-03-03", "2022-03-20", false),
