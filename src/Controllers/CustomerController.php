@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Classes\DB;
 use App\Classes\Response;
 use App\Services\RequestValidationService;
+use Exception;
 
 class CustomerController
 {
@@ -32,6 +33,9 @@ class CustomerController
         return Response::create($customer);
     }
 
+    /**
+     * @throws Exception
+     */
     public function store(): Response
     {
         $validator = RequestValidationService::create([
@@ -61,6 +65,9 @@ class CustomerController
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function update(): Response
     {
         $validator = RequestValidationService::create([
@@ -98,6 +105,9 @@ class CustomerController
         return Response::create([]);
     }
 
+    /**
+     * @throws Exception
+     */
     public function delete(): Response
     {
         $validator = RequestValidationService::create([

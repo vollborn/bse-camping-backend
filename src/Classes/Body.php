@@ -22,4 +22,13 @@ class Body
 
         return $body;
     }
+
+    public static function id(): ?int
+    {
+        $body = static::get();
+
+        return array_key_exists('id', $body)
+            ? $body['id']
+            : null;
+    }
 }

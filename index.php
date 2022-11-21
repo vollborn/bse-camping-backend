@@ -3,6 +3,8 @@
 require_once "vendor/autoload.php";
 
 use App\Classes\DB;
+use App\Classes\Response;
+use Pecee\SimpleRouter\Exceptions\NotFoundHttpException;
 use Pecee\SimpleRouter\SimpleRouter;
 use Dotenv\Dotenv;
 
@@ -30,7 +32,12 @@ SimpleRouter::setDefaultNamespace('App\Controllers');
 
 try {
     SimpleRouter::start();
+} catch (NotFoundHttpException) {
+    // route not found
+    die(Response::view('not-found.html', 404));
 } catch (Exception $exception) {
-    http_response_code(500);
-    die($exception->getMessage());
+    // any other error
+    die(Response::create([
+        'error' => $exception->getMessage()
+    ], 500));
 }

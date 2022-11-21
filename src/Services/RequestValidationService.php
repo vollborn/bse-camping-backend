@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Classes\Body;
 use App\Classes\Response;
 use App\Rules\ExistsRule;
+use App\Rules\UniqueRule;
 use Rakit\Validation\RuleQuashException;
 use Rakit\Validation\Validator;
 
@@ -29,6 +30,7 @@ class RequestValidationService
 
         try {
             $validator->addValidator('exists', new ExistsRule());
+            $validator->addValidator('unique', new UniqueRule());
         } catch (RuleQuashException) {
             // ignore
         }

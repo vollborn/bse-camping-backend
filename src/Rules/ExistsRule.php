@@ -17,16 +17,12 @@ class ExistsRule extends Rule
      */
     public function check($value): bool
     {
-        if ((int) $value != $value) {
-            return false;
-        }
-
         $this->requireParameters(['table']);
 
         $column = $this->parameter('column') ?? 'id';
         $table = $this->parameter('table');
 
-        $data = DB::fetch('SELECT id FROM ' . $table . ' WHERE ' . $column . ' = ' . (int) $value);
+        $data = DB::fetch('SELECT id FROM ' . $table . ' WHERE ' . $column . ' = ' . $value);
 
         return isset($data['id']);
     }

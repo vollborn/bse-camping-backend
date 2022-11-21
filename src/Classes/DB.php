@@ -25,6 +25,9 @@ class DB
         );
     }
 
+    /**
+     * @throws Exception
+     */
     public static function query(string $query, ?array $params = null): PDOStatement
     {
         $statement = self::$connection->prepare($query);
@@ -86,7 +89,11 @@ class DB
             $query .= file_get_contents($basePath . '/' . $file);
         }
 
-        self::query($query);
+        try {
+            self::query($query);
+        } catch (Exception) {
+            // ignore
+        }
     }
 
     public static function lastInsertId(): int
