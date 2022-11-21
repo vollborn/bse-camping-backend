@@ -1,13 +1,18 @@
 <?php
 
-use App\Controllers\PitchController;
-use App\Controllers\CustomerController;
 use App\Controllers\AdditionalCostController;
+use App\Controllers\AdditionalCostTypeController;
 use App\Controllers\BookingController;
+use App\Controllers\CountryController;
+use App\Controllers\CustomerController;
 use App\Controllers\PersonController;
+use App\Controllers\PitchController;
 use Pecee\SimpleRouter\SimpleRouter;
 
 $url = $_ENV['URL_PREFIX'];
+
+SimpleRouter::get($url . '/countries', [CountryController::class, 'index']);
+SimpleRouter::get($url . '/additional-cost-types', [AdditionalCostTypeController::class, 'index']);
 
 SimpleRouter::get($url . '/customers', [CustomerController::class, 'index']);
 SimpleRouter::get($url . '/customers/show', [CustomerController::class, 'show']);

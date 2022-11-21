@@ -4,6 +4,8 @@ CREATE TABLE bookings (
     pitch_id INT,
     start_at DATE,
     end_at DATE,
+
+    has_electricity BOOLEAN,
     has_pets BOOLEAN,
 
     FOREIGN KEY (customer_id)

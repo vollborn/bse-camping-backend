@@ -35,8 +35,9 @@ class AdditionalCostController
     public function store(): Response
     {
         $validator = RequestValidationService::create([
-            'display_name' => 'required',
-            'price'        => 'required|numeric'
+            'additional_cost_type_id' => 'required|integer|exists:additional_cost_types',
+            'display_name'            => 'required',
+            'price'                   => 'required|numeric'
         ]);
 
         if (!$validator->validate()) {
@@ -45,8 +46,8 @@ class AdditionalCostController
 
         $body = $validator->getBody();
 
-        $query = 'INSERT INTO additional_costs (display_name, price)'
-            . ' VALUES (:display_name, :price)';
+        $query = 'INSERT INTO additional_costs (additional_cost_type_id, display_name, price)'
+            . ' VALUES (:additional_cost_type_id, :display_name, :price)';
 
         DB::query($query, $body);
 
@@ -58,9 +59,10 @@ class AdditionalCostController
     public function update(): Response
     {
         $validator = RequestValidationService::create([
-            'id'           => 'required|integer|exists:additional_costs',
-            'display_name' => 'required',
-            'price'        => 'required|numeric'
+            'id'                      => 'required|integer|exists:additional_costs',
+            'additional_cost_type_id' => 'required|integer|exists:additional_cost_types',
+            'display_name'            => 'required',
+            'price'                   => 'required|numeric'
         ]);
 
         if (!$validator->validate()) {
@@ -70,6 +72,7 @@ class AdditionalCostController
         $body = $validator->getBody();
 
         $query = 'UPDATE additional_costs SET'
+            . ' additional_cost_type_id = :additional_cost_type_id,'
             . ' display_name = :display_name,'
             . ' price = :price'
             . ' WHERE id = :id';
