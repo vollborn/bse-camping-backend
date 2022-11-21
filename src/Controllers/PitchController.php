@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Classes\Body;
 use App\Classes\DB;
 use App\Classes\Response;
 use App\Services\RequestValidationService;
@@ -35,7 +36,7 @@ class PitchController
     public function store(): Response
     {
         $validator = RequestValidationService::create([
-            'field_number'  => 'required',
+            'field_number'  => 'required|unique:pitches',
             'width'         => 'required|numeric',
             'height'        => 'required|numeric',
             'price_per_day' => 'required|numeric'
@@ -61,7 +62,7 @@ class PitchController
     {
         $validator = RequestValidationService::create([
             'id'            => 'required|integer|exists:pitches',
-            'field_number'  => 'required',
+            'field_number'  => 'required|unique:pitches,field_number,' . Body::id(),
             'width'         => 'required|numeric',
             'height'        => 'required|numeric',
             'price_per_day' => 'required|numeric'
