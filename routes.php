@@ -4,6 +4,7 @@ use App\Controllers\AdditionalCostController;
 use App\Controllers\AdditionalCostTypeController;
 use App\Controllers\BookingController;
 use App\Controllers\BookingPersonController;
+use App\Controllers\BookingPriceController;
 use App\Controllers\CountryController;
 use App\Controllers\CustomerController;
 use App\Controllers\LoginController;
@@ -55,6 +56,7 @@ SimpleRouter::group([
     SimpleRouter::options($url . '/bookings', $empty);
 
     SimpleRouter::get($url . '/bookings/persons', [BookingPersonController::class, 'index']);
+    SimpleRouter::get($url . '/bookings/price', [BookingPriceController::class, 'show']);
 
     SimpleRouter::get($url . '/persons', [PersonController::class, 'index']);
     SimpleRouter::get($url . '/persons/show', [PersonController::class, 'show']);
