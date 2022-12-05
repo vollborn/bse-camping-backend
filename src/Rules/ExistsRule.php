@@ -22,7 +22,9 @@ class ExistsRule extends Rule
         $column = $this->parameter('column') ?? 'id';
         $table = $this->parameter('table');
 
-        $data = DB::fetch('SELECT id FROM ' . $table . ' WHERE ' . $column . ' = ' . $value);
+        $data = DB::fetch('SELECT id FROM ' . $table . ' WHERE ' . $column . ' = :value', [
+            'value' => $value
+        ]);
 
         return isset($data['id']);
     }

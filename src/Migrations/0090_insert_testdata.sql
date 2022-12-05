@@ -46,3 +46,6 @@ INSERT INTO additional_costs (additional_cost_type_id, display_name, price) VALU
 (2, "Erwachsenenpauschale 1", 10.00),
 (3, "Strompauschale 1", 10.00),
 (4, "Tierpauschale 1", 10.00);
+
+INSERT INTO users (id, name, password, api_token, is_admin) VALUES
+(1, "admin", "$2y$10$MSbKfp/0uv13DGDhAjgeXOErqSBtrFBBd.Vbh0zbPYoO9QJUPcnLC", "test", true)
