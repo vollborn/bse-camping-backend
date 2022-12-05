@@ -1,14 +1,16 @@
 CREATE TABLE customers (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
-    city VARCHAR(255),
-    postcode VARCHAR(255),
-    street VARCHAR(255),
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    city VARCHAR(100),
+    postcode VARCHAR(20),
+    street VARCHAR(100),
     country_id INT,
-    phone VARCHAR(255),
-    email VARCHAR(255),
+    phone VARCHAR(50),
+    email VARCHAR(100),
     date_of_birth DATE,
+
+    is_deleted BOOLEAN DEFAULT false,
 
     FOREIGN KEY (country_id)
         REFERENCES countries(id)

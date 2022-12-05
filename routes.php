@@ -3,6 +3,7 @@
 use App\Controllers\AdditionalCostController;
 use App\Controllers\AdditionalCostTypeController;
 use App\Controllers\BookingController;
+use App\Controllers\BookingPersonController;
 use App\Controllers\CountryController;
 use App\Controllers\CustomerController;
 use App\Controllers\PersonController;
@@ -37,6 +38,8 @@ SimpleRouter::get($url . '/bookings/show', [BookingController::class, 'show']);
 SimpleRouter::post($url . '/bookings', [BookingController::class, 'store']);
 SimpleRouter::put($url . '/bookings', [BookingController::class, 'update']);
 SimpleRouter::delete($url . '/bookings', [BookingController::class, 'delete']);
+
+SimpleRouter::get($url . '/bookings/persons', [BookingPersonController::class, 'index']);
 
 SimpleRouter::get($url . '/persons', [PersonController::class, 'index']);
 SimpleRouter::get($url . '/persons/show', [PersonController::class, 'show']);

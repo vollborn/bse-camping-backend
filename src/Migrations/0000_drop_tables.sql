@@ -4,5 +4,7 @@ DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS persons;
 DROP TABLE IF EXISTS pitches;
 DROP TABLE IF EXISTS additional_costs;
+DROP TABLE IF EXISTS additional_cost_types;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS countries;
+DROP TABLE IF EXISTS users;
