@@ -17,11 +17,11 @@ INSERT INTO pitches (field_number, width, height, price_per_day) VALUES
 ("2.2", 10.10, 5.0, 8.0),
 ("2.3", 8.10, 5.0, 9.0);
 
-INSERT INTO bookings (customer_id, pitch_id, start_at,  end_at, has_pets) value 
-(1, 1, "2022-03-03", "2022-03-20", false),
-(2, 3, "2022-03-03", "2022-03-19", true),
-(3, 2, "2022-03-20", "2022-04-20", false),
-(1, 1, "2022-04-03", "2022-04-20", true);
+INSERT INTO bookings (customer_id, pitch_id, start_at,  end_at, pet_count, has_electricity) value
+(1, 1, "2022-03-03", "2022-03-20", 10, false),
+(2, 3, "2022-03-03", "2022-03-19", 1, true),
+(3, 2, "2022-03-20", "2022-04-20", 0, false),
+(1, 1, "2022-04-03", "2022-04-20", 0, true);
 
 INSERT INTO persons (first_name, last_name, date_of_birth) VALUES 
 ("Mama", "Wau", "1988-12-26"),

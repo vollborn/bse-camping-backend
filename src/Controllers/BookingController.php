@@ -40,7 +40,7 @@ class BookingController
             'start_at'        => 'required|date',
             'end_at'          => 'required|date',
             'has_electricity' => 'required|boolean',
-            'has_pets'        => 'required|boolean',
+            'pet_count'       => 'required|integer',
             'persons'         => 'required|array',
             'persons.*'       => 'required|integer|exists:persons'
         ]);
@@ -51,15 +51,15 @@ class BookingController
 
         $body = $validator->getBody();
 
-        $query = 'INSERT INTO bookings (customer_id, pitch_id, start_at, end_at, has_electricity, has_pets)'
-            . ' VALUES (:customer_id, :pitch_id, :start_at, :end_at, :has_electricity, :has_pets)';
+        $query = 'INSERT INTO bookings (customer_id, pitch_id, start_at, end_at, has_electricity, pet_count)'
+            . ' VALUES (:customer_id, :pitch_id, :start_at, :end_at, :has_electricity, :pet_count)';
 
         DB::query($query, [
             'customer_id'     => $body['customer_id'],
             'pitch_id'        => $body['pitch_id'],
             'start_at'        => $body['start_at'],
             'end_at'          => $body['end_at'],
-            'has_pets'        => $body['has_pets'],
+            'pet_count'       => $body['pet_count'],
             'has_electricity' => $body['has_electricity']
         ]);
 
@@ -79,7 +79,7 @@ class BookingController
             'pitch_id'        => 'required|integer|exists:pitches',
             'start_at'        => 'required|date',
             'end_at'          => 'required|date',
-            'has_pets'        => 'required|boolean',
+            'pet_count'       => 'required|integer',
             'has_electricity' => 'required|boolean',
             'persons'         => 'required|array',
             'persons.*'       => 'required|integer|exists:persons'
@@ -97,7 +97,7 @@ class BookingController
             . ' start_at = :start_at,'
             . ' end_at = :end_at,'
             . ' has_electricity = :has_electricity'
-            . ' has_pets = :has_pets'
+            . ' pet_count = :pet_count'
             . ' WHERE id = :id';
 
         DB::query($query, [
@@ -107,7 +107,7 @@ class BookingController
             'start_at'        => $body['start_at'],
             'end_at'          => $body['end_at'],
             'has_electricity' => $body['has_electricity'],
-            'has_pets'        => $body['has_pets'],
+            'pet_count'       => $body['pet_count'],
         ]);
 
         DB::query('DELETE FROM booking_person WHERE booking_id = :id', [

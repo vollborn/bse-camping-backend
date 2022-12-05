@@ -6,7 +6,7 @@ CREATE TABLE bookings (
     end_at DATE,
 
     has_electricity BOOLEAN,
-    has_pets BOOLEAN,
+    pet_count INTEGER UNSIGNED,
 
     FOREIGN KEY (customer_id)
         REFERENCES customers(id)
