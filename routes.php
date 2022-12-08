@@ -26,6 +26,7 @@ SimpleRouter::options($url . '/customers', $empty);
 SimpleRouter::options($url . '/pitches', $empty);
 SimpleRouter::options($url . '/additional-costs', $empty);
 SimpleRouter::options($url . '/bookings', $empty);
+SimpleRouter::options($url . '/login', $empty);
 
 SimpleRouter::group([
     'middleware' => AuthMiddleware::class
