@@ -10,6 +10,7 @@ use App\Controllers\CustomerController;
 use App\Controllers\LoginController;
 use App\Controllers\PersonController;
 use App\Controllers\PitchController;
+use App\Controllers\PitchRequestController;
 use App\Middlewares\AuthMiddleware;
 use Pecee\SimpleRouter\SimpleRouter;
 
@@ -21,6 +22,9 @@ $empty = static function () {
 
 SimpleRouter::post($url . '/login', [LoginController::class, 'login']);
 SimpleRouter::options($url . '/login', [LoginController::class, 'login']);
+
+SimpleRouter::get($url . '/pitch-request', [PitchRequestController::class, 'index']);
+SimpleRouter::options($url . '/pitch-request', [PitchRequestController::class, 'index']);
 
 SimpleRouter::group([
     'middleware' => AuthMiddleware::class
