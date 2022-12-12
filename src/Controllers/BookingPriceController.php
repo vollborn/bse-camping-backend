@@ -49,11 +49,11 @@ class BookingPriceController
                     $price += $additionalCost['price'] * $adults;
                     break;
                 case AdditionalCostType::PET:
-                    $price += $additionalCost['price'] * $booking['pet_count'];
+                    $price += $additionalCost['price'] * $booking['pet_count'] * $days;
                     break;
                 case AdditionalCostType::ELECTRICITY:
                     if ($booking['has_electricity']) {
-                        $price += $additionalCost['price'];
+                        $price += $additionalCost['price'] * $days;
                     }
                     break;
             }
