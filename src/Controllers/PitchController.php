@@ -39,7 +39,9 @@ class PitchController
             'field_number'  => 'required|unique:pitches',
             'width'         => 'required|numeric',
             'height'        => 'required|numeric',
-            'price_per_day' => 'required|numeric'
+            'price_per_day' => 'required|numeric',
+            'coordinate_x'  => 'required|integer',
+            'coordinate_y'  => 'required|integer',
         ]);
 
         if (!$validator->validate()) {
@@ -48,8 +50,8 @@ class PitchController
 
         $body = $validator->getBody();
 
-        $query = 'INSERT INTO pitches (field_number, width, height, price_per_day)'
-            . ' VALUES (:field_number, :width, :height, :price_per_day)';
+        $query = 'INSERT INTO pitches (field_number, width, height, price_per_day, coordinate_x, coordinate_y)'
+            . ' VALUES (:field_number, :width, :height, :price_per_day, :coordinate_x, :coordinate_y)';
 
         DB::query($query, $body);
 
@@ -65,7 +67,9 @@ class PitchController
             'field_number'  => 'required|unique:pitches,field_number,' . Body::id(),
             'width'         => 'required|numeric',
             'height'        => 'required|numeric',
-            'price_per_day' => 'required|numeric'
+            'price_per_day' => 'required|numeric',
+            'coordinate_x'  => 'required|integer',
+            'coordinate_y'  => 'required|integer'
         ]);
 
         if (!$validator->validate()) {
@@ -79,6 +83,8 @@ class PitchController
             . ' width = :width,'
             . ' height = :height,'
             . ' price_per_day = :price_per_day'
+            . ' coordinate_x = :coordinate_x'
+            . ' coordinate_y = :coordinate_y'
             . ' WHERE id = :id';
 
         DB::query($query, $body);
