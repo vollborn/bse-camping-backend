@@ -2,6 +2,7 @@
 
 use App\Controllers\AdditionalCostController;
 use App\Controllers\AdditionalCostTypeController;
+use App\Controllers\BookingAdditionalCostController;
 use App\Controllers\BookingController;
 use App\Controllers\BookingPersonController;
 use App\Controllers\BookingPriceController;
@@ -82,6 +83,9 @@ SimpleRouter::group([
 
     get($url . '/bookings/persons', [BookingPersonController::class, 'index']);
     get($url . '/bookings/price', [BookingPriceController::class, 'show']);
+
+    get($url . '/bookings/additional-costs', [BookingAdditionalCostController::class, 'index']);
+    post($url . '/bookings/additional-costs', [BookingAdditionalCostController::class, 'store']);
 
     get($url . '/persons', [PersonController::class, 'index']);
     get($url . '/persons/show', [PersonController::class, 'show']);

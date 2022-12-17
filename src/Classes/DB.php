@@ -91,8 +91,8 @@ class DB
 
         try {
             self::query($query);
-        } catch (Exception) {
-            // ignore
+        } catch (Exception $exception) {
+            die($exception->getMessage());
         }
     }
 

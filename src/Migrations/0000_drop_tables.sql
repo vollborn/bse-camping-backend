@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS additional_cost_booking;
 DROP TABLE IF EXISTS booking_person;
 DROP TABLE IF EXISTS bookings;
 DROP TABLE IF EXISTS persons;

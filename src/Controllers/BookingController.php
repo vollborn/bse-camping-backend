@@ -39,7 +39,6 @@ class BookingController
             'pitch_id'        => 'required|numeric|exists:pitches',
             'start_at'        => 'required|date',
             'end_at'          => 'required|date',
-            'has_electricity' => 'required|boolean',
             'pet_count'       => 'required|integer',
             'persons'         => 'required|array',
             'persons.*'       => 'required|integer|exists:persons'
@@ -51,16 +50,15 @@ class BookingController
 
         $body = $validator->getBody();
 
-        $query = 'INSERT INTO bookings (customer_id, pitch_id, start_at, end_at, has_electricity, pet_count)'
-            . ' VALUES (:customer_id, :pitch_id, :start_at, :end_at, :has_electricity, :pet_count)';
+        $query = 'INSERT INTO bookings (customer_id, pitch_id, start_at, end_at, pet_count)'
+            . ' VALUES (:customer_id, :pitch_id, :start_at, :end_at, :pet_count)';
 
         DB::query($query, [
             'customer_id'     => $body['customer_id'],
             'pitch_id'        => $body['pitch_id'],
             'start_at'        => $body['start_at'],
             'end_at'          => $body['end_at'],
-            'pet_count'       => $body['pet_count'],
-            'has_electricity' => $body['has_electricity']
+            'pet_count'       => $body['pet_count']
         ]);
 
         $id = DB::lastInsertId();
@@ -80,7 +78,6 @@ class BookingController
             'start_at'        => 'required|date',
             'end_at'          => 'required|date',
             'pet_count'       => 'required|integer',
-            'has_electricity' => 'required|boolean',
             'persons'         => 'required|array',
             'persons.*'       => 'required|integer|exists:persons'
         ]);
@@ -96,7 +93,6 @@ class BookingController
             . ' pitch_id = :pitch_id,'
             . ' start_at = :start_at,'
             . ' end_at = :end_at,'
-            . ' has_electricity = :has_electricity'
             . ' pet_count = :pet_count'
             . ' WHERE id = :id';
 
@@ -106,7 +102,6 @@ class BookingController
             'pitch_id'        => $body['pitch_id'],
             'start_at'        => $body['start_at'],
             'end_at'          => $body['end_at'],
-            'has_electricity' => $body['has_electricity'],
             'pet_count'       => $body['pet_count'],
         ]);
 

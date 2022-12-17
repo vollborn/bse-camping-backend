@@ -17,11 +17,11 @@ INSERT INTO pitches (field_number, width, height, price_per_day) VALUES
 ("2.2", 10.10, 5.0, 8.0),
 ("2.3", 8.10, 5.0, 9.0);
 
-INSERT INTO bookings (customer_id, pitch_id, start_at,  end_at, pet_count, has_electricity) value
-(1, 1, "2022-03-03", "2022-03-20", 10, false),
-(2, 3, "2022-03-03", "2022-03-19", 1, true),
-(3, 2, "2022-03-20", "2022-04-20", 0, false),
-(1, 1, "2022-04-03", "2022-04-20", 0, true);
+INSERT INTO bookings (customer_id, pitch_id, start_at,  end_at, pet_count) value
+(1, 1, "2022-03-03", "2022-03-20", 10),
+(2, 3, "2022-03-03", "2022-03-19", 1),
+(3, 2, "2022-03-20", "2022-04-20", 0),
+(1, 1, "2022-04-03", "2022-04-20", 0);
 
 INSERT INTO persons (first_name, last_name, date_of_birth) VALUES 
 ("Mama", "Wau", "1988-12-26"),
@@ -36,16 +36,28 @@ INSERT INTO booking_person (booking_id, person_id) VALUES
 (1,4);
 
 INSERT INTO additional_cost_types (id, display_name) VALUES
-(1, "Kinderpauschale"),
-(2, "Erwachsenenpauschale"),
-(3, "Strompauschale"),
-(4, "Tierpauschale");
+(1, "Einmaling"),
+(2, "Einmaling pro Person"),
+(3, "Einmaling pro Erwachsener"),
+(4, "Einmaling pro Kind"),
+(5, "Einmaling pro Haustier"),
+(6, "Täglich"),
+(7, "Täglich pro Person"),
+(8, "Täglich pro Erwachsener"),
+(9, "Täglich pro Kind"),
+(10, "Täglich pro Haustier");
 
 INSERT INTO additional_costs (additional_cost_type_id, display_name, price) VALUES
-(1, "Kinderpauschale 1", 10.00),
-(2, "Erwachsenenpauschale 1", 10.00),
-(3, "Strompauschale 1", 10.00),
-(4, "Tierpauschale 1", 10.00);
+(1, "Strompauschale", 10.00),
+(2, "Personenpauschale", 10.00),
+(3, "Erwachsenenpauschale", 10.00),
+(4, "Kinderpauschale", 10.00),
+(5, "Tierpauschale", 10.00),
+(6, "Stellplatzpauschale", 10.00),
+(7, "Pool-Pauschale", 10.00),
+(8, "Saunapauschale", 10.00),
+(9, "Trampolinpauschale", 10.00),
+(10, "Futterpauschale", 10.00);
 
-INSERT INTO users (id, name, password, api_token, is_admin) VALUES
-(1, "admin", "$2y$10$MSbKfp/0uv13DGDhAjgeXOErqSBtrFBBd.Vbh0zbPYoO9QJUPcnLC", "test", true)
+INSERT INTO users (id, name, password, api_token) VALUES
+(1, "admin", "$2y$10$MSbKfp/0uv13DGDhAjgeXOErqSBtrFBBd.Vbh0zbPYoO9QJUPcnLC", "test");
