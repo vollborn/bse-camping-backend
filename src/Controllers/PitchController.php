@@ -82,8 +82,8 @@ class PitchController
             . ' field_number = :field_number,'
             . ' width = :width,'
             . ' height = :height,'
-            . ' price_per_day = :price_per_day'
-            . ' coordinate_x = :coordinate_x'
+            . ' price_per_day = :price_per_day,'
+            . ' coordinate_x = :coordinate_x,'
             . ' coordinate_y = :coordinate_y'
             . ' WHERE id = :id';
 

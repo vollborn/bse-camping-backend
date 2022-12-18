@@ -47,8 +47,9 @@ class BookingAdditionalCostController
 
         $body = $validator->getBody();
 
-        DB::query('DELETE FROM additional_cost_booking WHERE booking_id = :booking_id', [
-            'booking_id' => $body['booking_id']
+        DB::query('DELETE FROM additional_cost_booking WHERE booking_id = :booking_id AND additional_cost_id = :additional_cost_id', [
+            'booking_id' => $body['booking_id'],
+            'additional_cost_id' => $body['additional_cost_id']
         ]);
 
         $query = 'INSERT INTO additional_cost_booking (booking_id, additional_cost_id, amount)

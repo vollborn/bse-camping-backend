@@ -18,7 +18,7 @@ use Pecee\SimpleRouter\SimpleRouter;
 $url = $_ENV['URL_PREFIX'];
 
 $empty = static function () {
-    // empty callback
+    return [];
 };
 
 SimpleRouter::post($url . '/login', [LoginController::class, 'login']);
@@ -26,6 +26,22 @@ SimpleRouter::options($url . '/login', [LoginController::class, 'login']);
 
 SimpleRouter::get($url . '/pitch-request', [PitchRequestController::class, 'index']);
 SimpleRouter::options($url . '/pitch-request', [PitchRequestController::class, 'index']);
+
+// preflight requests
+SimpleRouter::options($url . '/countries', $empty);
+SimpleRouter::options($url . '/additional-cost-types', $empty);
+SimpleRouter::options($url . '/pitches', $empty);
+SimpleRouter::options($url . '/pitches/show', $empty);
+SimpleRouter::options($url . '/additional-costs', $empty);
+SimpleRouter::options($url . '/additional-costs/show', $empty);
+SimpleRouter::options($url . '/bookings', $empty);
+SimpleRouter::options($url . '/bookings/show', $empty);
+SimpleRouter::options($url . '/bookings/persons', $empty);
+SimpleRouter::options($url . '/bookings/price', $empty);
+SimpleRouter::options($url . '/persons', $empty);
+SimpleRouter::options($url . '/customers', $empty);
+SimpleRouter::options($url . '/customers/show', $empty);
+SimpleRouter::options($url . '/bookings/additional-costs', $empty);
 
 SimpleRouter::group([
     'middleware' => AuthMiddleware::class

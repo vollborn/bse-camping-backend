@@ -6,16 +6,16 @@ INSERT INTO customers (first_name, last_name, city, postcode, street, country_id
 ("Hans", "Wau", "Hamburg", "22566", "Walter-Baum-Strasse 1", 1, "04107203481", "hans@mail.de", "1999-12-06"),
 ("Walter", "Wau", "Dings", "23654", "Baum-Baum-Strasse 6", 1, "666666", "lena@mail.de", "2015-02-03");
 
-INSERT INTO pitches (field_number, width, height, price_per_day) VALUES
-("0.1", 10.10, 5.0, 1.0),
-("0.2", 5.10, 5.0, 2.0),
-("0.3", 6.10, 5.0, 3.0),
-("1.1", 7.10, 5.0, 4.0),
-("1.2", 10.10, 5.0, 5.0),
-("1.3", 10.10, 5.0, 6.0),
-("2.1", 5.10, 5.0, 7.0),
-("2.2", 10.10, 5.0, 8.0),
-("2.3", 8.10, 5.0, 9.0);
+INSERT INTO pitches (field_number, width, height, price_per_day, coordinate_x, coordinate_y) VALUES
+("0.1", 10.10, 5.0, 1.0, 8, 2),
+("0.2", 5.10, 5.0, 2.0, 9, 2),
+("0.3", 6.10, 5.0, 3.0, 7, 4),
+("1.1", 7.10, 5.0, 4.0, 8, 5),
+("1.2", 10.10, 5.0, 5.0, 21, 4),
+("1.3", 10.10, 5.0, 6.0, 26, 5),
+("2.1", 5.10, 5.0, 7.0, 20, 7),
+("2.2", 10.10, 5.0, 8.0, 16, 7),
+("2.3", 8.10, 5.0, 9.0, 5, 7);
 
 INSERT INTO bookings (customer_id, pitch_id, start_at,  end_at, pet_count) value
 (1, 1, "2022-03-03", "2022-03-20", 10),
@@ -36,11 +36,11 @@ INSERT INTO booking_person (booking_id, person_id) VALUES
 (1,4);
 
 INSERT INTO additional_cost_types (id, display_name) VALUES
-(1, "Einmaling"),
-(2, "Einmaling pro Person"),
-(3, "Einmaling pro Erwachsener"),
-(4, "Einmaling pro Kind"),
-(5, "Einmaling pro Haustier"),
+(1, "Einmalig"),
+(2, "Einmalig pro Person"),
+(3, "Einmalig pro Erwachsener"),
+(4, "Einmalig pro Kind"),
+(5, "Einmalig pro Haustier"),
 (6, "Täglich"),
 (7, "Täglich pro Person"),
 (8, "Täglich pro Erwachsener"),
