@@ -24,6 +24,8 @@ $empty = static function () {
 SimpleRouter::post($url . '/login', [LoginController::class, 'login']);
 SimpleRouter::options($url . '/login', [LoginController::class, 'login']);
 
+SimpleRouter::get($url . '/pitches', [PitchController::class, 'index']);
+
 SimpleRouter::get($url . '/pitch-request', [PitchRequestController::class, 'index']);
 SimpleRouter::options($url . '/pitch-request', [PitchRequestController::class, 'index']);
 
